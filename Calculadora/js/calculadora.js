@@ -48,7 +48,7 @@ function split(text) {
         for (x in values) {
             if (sum != 0) {
                 sum = sum + parseFloat(values[x]);
-            } else {sum = parseFloat(values[x]);}
+            } else { sum = parseFloat(values[x]); }
         }
         return sum;
     } else if (text.includes('-')) {
@@ -62,7 +62,7 @@ function split(text) {
         for (x in values) {
             if (sub != 0) {
                 sub = sub - parseFloat(values[x]);
-            } else {sub = parseFloat(values[x]);}
+            } else { sub = parseFloat(values[x]); }
         }
         return sub;
     } else if (text.includes('x')) {
@@ -76,7 +76,7 @@ function split(text) {
         for (x in values) {
             if (mul != 0) {
                 mul = mul * parseFloat(values[x]);;
-            } else {mul = parseFloat(values[x]);;}
+            } else { mul = parseFloat(values[x]);; }
         }
         return mul;
     } else if (text.includes('/')) {
@@ -90,8 +90,17 @@ function split(text) {
         for (x in values) {
             if (div != 0) {
                 div = div / parseFloat(values[x]);;
-            } else {div = parseFloat(values[x]);;}
+            } else { div = parseFloat(values[x]);; }
         }
         return div;
+    } else if (text.includes('%')) {
+        let values = text.split('%');
+        for (x in values) {
+            if (isNaN(values[x])) {
+                values[x] = split(values[x]);
+            }
+        }
+        let per = values[0];
+        return per = per/100;
     }
 }
