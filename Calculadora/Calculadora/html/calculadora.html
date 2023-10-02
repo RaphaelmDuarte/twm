@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html class="page">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../css/calculadora.css">
+    <link rel="icon" type="image/x-icon" href="../imagens/calc.ico">
+    <title>Calculadora</title>
+</head>
+
+<body class="calculadora">
+    <div id="cabecalho">
+        <div id="back">
+            <button id="back-button" onclick="window.location.href='../index.html'">Voltar</button>
+        </div>
+    </div>
+    <div id="calc">
+        <div id="calc-full">
+            <div id="calc-panel">
+                <label id="calc-panel-label"></label>
+            </div>
+            <div id="calc-keys">
+                <div class="keys" id="c-button" onclick="cleanPanel()">C</div>
+                <div class="keys" id="+-button">+/-</div>
+                <div class="keys" id="%-button" onclick="pressKey('%')">%</div>
+                <div class="keys" id="del-button" onclick="dellKey()">DEL</div>
+                <div class="keys" id="7-button" onclick="pressKey(7)">7</div>
+                <div class="keys" id="8-button" onclick="pressKey(8)">8</div>
+                <div class="keys" id="9-button" onclick="pressKey(9)">9</div>
+                <div class="keys" id="div-button" onclick="pressKey('/')">/</div>
+                <div class="keys" id="4-button" onclick="pressKey(4)">4</div>
+                <div class="keys" id="5-button" onclick="pressKey(5)">5</div>
+                <div class="keys" id="6-button" onclick="pressKey(6)">6</div>
+                <div class="keys" id="mult-button" onclick="pressKey('x')">x</div>
+                <div class="keys" id="1-button" onclick="pressKey(1)">1</div>
+                <div class="keys" id="2-button" onclick="pressKey(2)">2</div>
+                <div class="keys" id="3-button" onclick="pressKey(3)">3</div>
+                <div class="keys" id="min-button" onclick="pressKey('-')">-</div>
+                <div class="keys" id="0-button" onclick="pressKey(0)">0</div>
+                <div class="keys" id="cm-button" onclick="pressKey('.')">.</div>
+                <div class="keys" id="eq-button" onclick="pressEquals()">=</div>
+                <div class="keys" id="pls-button" onclick="pressKey('+')">+</div>
+            </div>
+        </div>
+    </div>
+    <div class="rodape">
+    </div>
+    <script src="../js/calculadora.js"></script>
+</body>
+
+</html>
