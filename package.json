@@ -1,0 +1,11 @@
+{
+  "name": "calculadora",
+  "version": "1.0.0",
+  "description": "Projeto calculadora",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx browser-sync -w"
+  },
+  "author": "",
+  "license": "ISC"
+}
