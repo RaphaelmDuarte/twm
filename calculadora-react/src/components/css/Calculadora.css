@@ -1,0 +1,97 @@
+html, body, #root{
+    height: 100%
+}
+
+.page {
+    height: 100%;
+    width: 100%;
+    display: grid;
+}
+
+.calculadora {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    align-content: space-between;
+}
+
+#calc {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#cabecalho {
+    display: grid;
+    justify-items: flex-end;
+    width: 100%;
+}
+
+#back {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#back-button {
+    border-radius: 10rem;
+}
+
+#calc-full {
+    border: 2px solid grey;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+}
+
+#calc-panel {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+    width: 95%;
+    margin: 5px;
+    padding: 2px;
+    border: 2px solid grey;
+    user-select: none;
+}
+
+#calc-keys {
+    display: flow-root;
+    width: 100%;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.keys {
+    align-items: center;
+    border: 2px solid grey;
+    border-radius: 15px;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin: 2px;
+    text-align: center;
+    width: 21% !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    position: relative;
+    padding: 5px;
+    user-select: none;  
+    cursor: pointer;
+}
+
+.keys:active {
+    background-color: red !important;
+}
+
+#eq-button {
+    background-color: orange;
+}
+
+#div-button, #mult-button, #min-button, #pls-button {
+    color: orange;
+    background-color: rgb(231, 230, 230);   
+}
