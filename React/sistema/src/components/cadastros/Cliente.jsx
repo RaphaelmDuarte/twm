@@ -16,7 +16,8 @@ const cpfMask = (value) => {
 const cepMask = (value) => {    
         if (!value) return "";
         value = value.replace(/\D/g,'');
-        value = value.replace(/(\d{5})(\d)/,'$1-$2');
+        value = value.replace(/(\d{2})(\d)/,'$1.$2')
+        value = value.replace(/(\d{3})(\d)/,'$1-$2');
         return value;    
 }
 
@@ -51,6 +52,7 @@ const Clientes = (props) => {
             setEmail(response.data[0].email);
             setCPF(response.data[0].cpf);
             setCEP(response.data[0].cep);
+            setDataNascimento(response.data[0].dataNascimento)
         })
       }
     },[novoRegistro])
@@ -79,9 +81,9 @@ const Clientes = (props) => {
 
     const BuscaCEP = async (cep) => {
         console.log('Dentro da função!!!');
-        if((String(cep).length) === 9) {
+        if((String(cep).length) === 10) {
             console.log(cep);
-            let cepSemPonto = cep.replace('-','');
+            let cepSemPonto = cep.replace('-','').replace('.', '');
             console.log(cepSemPonto);
             axios.get((`https://viacep.com.br/ws/${cepSemPonto}/json`)).then((response) => {
                 console.log(response.data);
@@ -160,7 +162,7 @@ const Clientes = (props) => {
                             <Col sm={2}>
                                  <div className="txtCEP" >
                                      <Form.Label className="text-left" style={{ width: "100%" }}>CEP</Form.Label>
-                                     <Form.Control type='text'  maxLength="9"
+                                     <Form.Control type='text'  maxLength="10"
                                      value={cep}
                                      onChange={e=>setCEP(cepMask(e.target.value))}
                                      />

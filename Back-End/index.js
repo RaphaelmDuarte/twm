@@ -10,7 +10,7 @@ let clientes = [
         "email" : "miguel@teste.com",
         "endereco" : "",
         "cpf" : "123.456.789-10",
-        "cep" : "38409-085",
+        "cep" : "38.409-085",
         "bairro" : "Novo Mundo",
         "localidade" : "Av. Victor Alves Pereira",
         "cidade" : "Uberlândia",
