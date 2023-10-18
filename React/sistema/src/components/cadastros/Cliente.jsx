@@ -16,7 +16,8 @@ const cpfMask = (value) => {
 const cepMask = (value) => {
   if (!value) return "";
   value = value.replace(/\D/g, "");
-  value = value.replace(/(\d{5})(\d)/, "$1-$2");
+  value = value.replace(/(\d{2})(\d)/, "$1.$2")
+  value = value.replace(/(\d{3})(\d)/, "$1-$2");
   return value;
 };
 
@@ -64,9 +65,9 @@ const Clientes = (props) => {
 
   const BuscaCEP = async (cep) => {
     console.log("Dentro da função!!");
-    if (String(cep).length === 9) {
+    if (String(cep).length === 10) {
       console.log(cep);
-      let cepSemPonto = cep.replace("-", "");
+      let cepSemPonto = cep.replace("-", "").replace(".", "");
       console.log(cepSemPonto);
       axios
         .get(`https://viacep.com.br/ws/${cepSemPonto}/json`)
@@ -149,7 +150,7 @@ const Clientes = (props) => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    maxLength="9"
+                    maxLength="10"
                     value={cep}
                     onChange={(e) => setCEP(cepMask(e.target.value))}
                   />
