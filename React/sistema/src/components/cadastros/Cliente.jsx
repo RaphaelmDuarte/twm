@@ -111,6 +111,22 @@ const Clientes = (props) => {
         console.log(novoRegistro);      
     }
 
+    const handleSalvar = () => {
+     let cliente = {
+                "nome" : nome,
+                "email" : email,
+                "endereco" : "",
+                "cpf" : cpf,
+                "cep" : cep,
+                "bairro" : bairro,
+                "localidade" : localidade,
+                "cidade" : cidade,
+                "uf" : uf,
+                "complemento" : complemento,
+                "dataNascimento" : dataNascimento,
+                "idade": idade
+            }
+    }
 
     return (
         <div>
@@ -257,7 +273,7 @@ const Clientes = (props) => {
                                     <Button variant="primary" size="lg" onClick={e=>handleNovo()}>Novo</Button>{' '}
                                 </Col>
                                 <Col>
-                                    <Button variant="primary" size="lg">Primary</Button>{' '}
+                                    <Button variant="primary" size="lg" onClick={e=>handleSalvar()}>Salvar</Button>{' '}
                                 </Col>
                                 <Col>
                                     <Button variant="primary" size="lg">Primary</Button>{' '}
