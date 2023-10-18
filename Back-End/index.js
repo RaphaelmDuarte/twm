@@ -22,7 +22,7 @@ let clientes = [
 ]
 
 app.get("/", (req, res) => {
-    res.send("Maravilha!!!");
+    res.send("Rest!!!");
 })
 
 app.get("/about", (req, res) => {
@@ -34,10 +34,10 @@ app.get("/clientes", (req, res) => {
 })
 
 app.post("/alunos", (req, res) => {
-    aluno = req.body;
-    console.log(aluno);
-    alunos.push(aluno);
-    res.json(alunos);
+    let cliente = req.body;
+    console.log(cliente);
+    clientes.push(cliente);
+    res.json(clientes);
 })
 
 
