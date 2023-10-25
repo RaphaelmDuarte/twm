@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Form, Col, Row, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import ModalPesquisa from '../utils/ModalPesquisa';
 
 const cpfMask = (value) => {
     console.log('Dentro do CPF');
@@ -15,10 +16,9 @@ const cpfMask = (value) => {
 
 const cepMask = (value) => {    
         if (!value) return "";
-        value = value.replace(/\D/g,'');
-        value = value.replace(/(\d{2})(\d)/,'$1.$2')
-        value = value.replace(/(\d{3})(\d)/,'$1-$2');
-        return value;    
+        return value.replace(/\D/g,'')
+            .replace(/(\d{2})(\d)/,'$1.$2')
+            .replace(/(\d{3})(\d)/,'$1-$2');   
 }
 
 const dateMask = (value) => {
@@ -43,11 +43,12 @@ const Clientes = (props) => {
     const [numeroCasa,      setNumeroCasa]      = useState(0);
     const [idade,           setIdade]           = useState(0);
     const [novoRegistro,    setNovoRegistro]    = useState(true);
+    const [showPesquisa,    setShowPesquisa]    = useState(false);
+    const [nomePesquisa,    setNomePesquisa]    = useState('');
 
     useEffect(() => {   
-      if (novoRegistro === true) {     
+      if (novoRegistro === false) {     
         axios.get(("http://localhost:5000/clientes")).then((response) => {
-            console.log(response.data);
             setNome(response.data[0].nome);
             setEmail(response.data[0].email);
             setCPF(response.data[0].cpf);
@@ -71,22 +72,19 @@ const Clientes = (props) => {
             let [dia, mes, ano] = dataNascimento.split('/');
             let dataNasc = new Date(+ano, +mes - 1, +dia);
             let hoje        = new Date();
-            let idade       = hoje.getFullYear() - dataNasc.getFullYear();            
-            console.log(idade);
+            let idade       = hoje.getFullYear() - dataNasc.getFullYear();
             setIdade(idade);
             return idade;    
-        }  
+        } else if((String(dataNascimento).length) === 0) {
+            setIdade(0)
+        } 
     }
 
 
     const BuscaCEP = async (cep) => {
-        console.log('Dentro da função!!!');
         if((String(cep).length) === 10) {
-            console.log(cep);
             let cepSemPonto = cep.replace('-','').replace('.', '');
-            console.log(cepSemPonto);
             axios.get((`https://viacep.com.br/ws/${cepSemPonto}/json`)).then((response) => {
-                console.log(response.data);
                 setEndereco(response.data.logradouro);
                 setBairro(response.data.bairro);
                 setCidade(response.data.localidade);
@@ -96,10 +94,8 @@ const Clientes = (props) => {
     }
 
     const handleNovo = () => {
-        console.log("Mudando o valor da flag..");
         setNovoRegistro(true);
         setNome("");
-        console.log(novoRegistro);
         setEmail("");
         setCPF("");
         setCEP(""); 
@@ -107,11 +103,10 @@ const Clientes = (props) => {
         setBairro("");
         setCidade("");
         setUF("");
-        setNovoRegistro(false);
-        console.log(novoRegistro);      
+        setDataNascimento("");   
     }
 
-    const handleSalvar = () => {
+    const handleSalvar = async () => {
      let cliente = {
                 "nome" : nome,
                 "email" : email,
@@ -119,13 +114,33 @@ const Clientes = (props) => {
                 "cpf" : cpf,
                 "cep" : cep,
                 "bairro" : bairro,
-                "localidade" : localidade,
-                "cidade" : cidade,
+                "cidade" : cidade, 
                 "uf" : uf,
                 "complemento" : complemento,
                 "dataNascimento" : dataNascimento,
                 "idade": idade
             }
+
+            console.warn(cliente);
+
+            await axios.post('http://localhost:5000/clientes', cliente, {
+                headers: {
+                  // Overwrite Axios's automatically set Content-Type
+                  'Content-Type': 'application/json'
+                }
+              });
+    }
+
+    const handlePesquisa = async () => {
+        let cliente_json = {"nome": nomePesquisa}
+        
+        const res = await axios.get(`http://localhost:5000/clientes/${nomePesquisa}`, {params: {cliente_json}}, {
+            headers: {
+              // Overwrite Axios's automatically set Content-Type
+              'Content-Type': 'application/json'
+            }
+          });
+        console.log(res);
     }
 
     return (
@@ -276,7 +291,15 @@ const Clientes = (props) => {
                                     <Button variant="primary" size="lg" onClick={e=>handleSalvar()}>Salvar</Button>{' '}
                                 </Col>
                                 <Col>
-                                    <Button variant="primary" size="lg">Primary</Button>{' '}
+                                    <Button variant="primary" size="lg" onClick={e=>setShowPesquisa(true)}>Pesquisar</Button>{' '}
+                                    <ModalPesquisa titulo={"Pesquisa de Clientes"}
+                                    texto={"Digite o nome do cliente"}
+                                    show={showPesquisa}
+                                    nome={nomePesquisa}
+                                    changeNome={setNomePesquisa}
+                                    close={setShowPesquisa}
+                                    pesquisar={handlePesquisa}
+                                    />
                                 </Col>
                             </Row>
                         </Container>    
