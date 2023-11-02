@@ -7,19 +7,21 @@ CREATE TABLE Aluno(
     numero int,
     complemento varchar(45),
     cidade varchar(45),
-    estado varchar(2)
+    estado varchar(2),
+    CONSTRAINT aluno_cpf_uk UNIQUE (cpf)
 );
 
 CREATE TABLE Professor(
     id BigSerial PRIMARY KEY,
     nome varchar(45),
     email varchar(45),
-    cpf int,
+    cpf varchar(20),
     endereco varchar(45),
     numero int,
     complemento varchar(45),
     cidade varchar(45),
-    estado varchar(2)
+    estado varchar(2),
+    CONSTRAINT professor_cpf_uk UNIQUE (cpf)
 );
 
 CREATE TABLE Curso(

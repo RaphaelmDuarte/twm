@@ -1,7 +1,8 @@
 from pydantic import BaseModel
+from typing import Optional
 
-class AlunoView(BaseModel):
-    id: int
+class AlunoForm(BaseModel):
+    id: Optional[int] = None
     nome: str
     email: str
     cpf: str
@@ -11,8 +12,8 @@ class AlunoView(BaseModel):
     cidade: str
     estado: str
 
-class ProfessorView(BaseModel):
-    id: int
+class ProfessorForm(BaseModel):
+    id: Optional[int] = None
     nome: str
     email: str
     cpf: str

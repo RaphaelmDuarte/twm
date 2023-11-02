@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Col, Row, Button, Container } from 'react-bootstrap';
+import { Form, Col, Row } from 'react-bootstrap';
 import axios from "axios";
 
 const Cursos = (props) => {
@@ -13,12 +13,13 @@ const Cursos = (props) => {
         // Make an HTTP request and update state with the response data
         axios.get('http://localhost:8000/professor')
             .then(response => {
-                console.log(response)
+                const professoresData = response.data;
+                setProfessores(professoresData);
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-    }, [professores])
+    }, [])
 
     return (
         <div>

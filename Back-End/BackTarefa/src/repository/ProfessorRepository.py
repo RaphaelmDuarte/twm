@@ -1,11 +1,12 @@
 from settings import CONECTION
+from src.models.Form import ProfessorForm
 from src.models.View import ProfessorView
 
 connected = CONECTION
 
-async def get_all_professors():
+async def get_all_professores():
     professores = []
-    query = "SELECT * FROM Professor"
+    query = "SELECT * FROM Professor;"
     conn = connected
     cur = conn.cursor()
     try:
@@ -25,5 +26,30 @@ async def get_all_professors():
                 estado=data[8]
             ))
         return professores
+    except Exception as e:
+        print(e)
+
+async def create_professor(professor: ProfessorForm):
+    query = """INSERT INTO Professor(nome, email, cpf, endereco, numero, complemento, cidade, estado)
+                VALUES('{}', '{}' , '{}', '{}', {}, '{}', '{}', '{}') RETURNING id;"""
+    conn = connected
+    cur = conn.cursor()
+    try:
+        sql = query.format(professor.nome, professor.email, professor.cpf, professor.endereco,
+                           professor.numero, professor.complemento, professor.cidade, professor.estado)
+        cur.execute(sql)
+        id = cur.fetchone()[0]
+        conn.commit()
+        return ProfessorView(
+            id=id,
+            nome=professor.nome,
+            email=professor.email,
+            cpf=professor.cpf,
+            endereco=professor.endereco,
+            numero=professor.numero,
+            complemento=professor.complemento,
+            cidade=professor.cidade,
+            estado=professor.estado
+        )
     except Exception as e:
         print(e)
