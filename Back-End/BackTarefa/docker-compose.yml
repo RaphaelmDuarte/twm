@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  banco:
+    image: postgres
+    command: postgres -c shared_buffers=8000MB
+    environment:
+      - POSTGRES_DB=tarefa
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=GMT
+    volumes:
+      - ./data/postgres:/var/lib/teste/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/1.sql
+    ports:
+      - "5000:5432"
+    networks:
+      tarefa:
+        ipv4_address: 197.110.0.2
+
+networks:
+  tarefa:
+    name: tarefa
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 197.110.0.0/24

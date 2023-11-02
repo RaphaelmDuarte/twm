@@ -24,14 +24,14 @@ const cepMask = (value) => {
 const Professores = (props) => {
     const [nome,            setNome]            = useState('');
     const [email,           setEmail]           = useState('');
-    const [endereco,        setEndereco]        = useState('');
     const [cpf,             setCPF]             = useState('');
     const [cep,             setCEP]             = useState('');
-    const [bairro,          setBairro]          = useState('');
+    const [endereco,        setEndereco]        = useState('');
+    const [numeroCasa,      setNumeroCasa]      = useState(0);
+    const [complemento,     setComplemento]     = useState('');
     const [cidade,          setCidade]          = useState('');
     const [uf,              setUF]              = useState('');
-    const [complemento,     setComplemento]     = useState('');
-    const [numeroCasa,      setNumeroCasa]      = useState(0);
+    const [bairro,          setBairro]          = useState('');
     const [showPesquisa,    setShowPesquisa]    = useState(false);
     const [nomePesquisa,    setNomePesquisa]    = useState('');
 
@@ -65,7 +65,7 @@ const Professores = (props) => {
     }
 
     const handleSalvar = async () => {
-     let cliente = {
+     let professor = {
                 "nome" : nome,
                 "email" : email,
                 "endereco" : "",
@@ -77,9 +77,9 @@ const Professores = (props) => {
                 "complemento" : complemento
             }
 
-            console.warn(cliente);
+            console.warn(professor);
 
-            await axios.post('http://localhost:5000/clientes', cliente, {
+            await axios.post('http://localhost:5000/clientes', professor, {
                 headers: {
                   // Overwrite Axios's automatically set Content-Type
                   'Content-Type': 'application/json'

@@ -7,17 +7,18 @@ const Cursos = (props) => {
     const [professores, setProfessores] = useState([]);
 
     useEffect(() => {
-        const professoresData = [{"id": 1, "nome": "Raphael"}, {"id": 2, "nome": "Jorge"}]; // Assuming the response data is an array of options
+        /* const professoresData = [{"id": 1, "nome": "Raphael"}, {"id": 2, "nome": "Jorge"}]; // Assuming the response data is an array of options
         setProfessores(professoresData);
-        console.log(professores)
-        /* // Make an HTTP request and update state with the response data
-        axios.get('your_api_endpoint')
+        console.log(professores) */
+        // Make an HTTP request and update state with the response data
+        axios.get('http://localhost:8000/professor')
             .then(response => {
+                console.log(response)
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
-            }); */
-    }, [])
+            });
+    }, [professores])
 
     return (
         <div>

@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+src/models/__pycache__/
+src/repository/__pycache__/
+src/routes/__pycache__/
+src/service/__pycache__/
