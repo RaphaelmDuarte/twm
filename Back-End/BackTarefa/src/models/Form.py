@@ -12,6 +12,11 @@ class AlunoForm(BaseModel):
     cidade: str
     estado: str
 
+class CursoForm(BaseModel):
+    id: Optional[int] = None
+    nome: str
+    professor_id: int
+
 class ProfessorForm(BaseModel):
     id: Optional[int] = None
     nome: str
@@ -22,3 +27,7 @@ class ProfessorForm(BaseModel):
     complemento: str
     cidade: str
     estado: str
+
+class VinculoForm(BaseModel):
+    aluno_id: int
+    curso_id: int

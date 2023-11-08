@@ -80,7 +80,7 @@ const Professores = (props) => {
 
         console.warn(professor);
 
-        const res = await axios.post('http://localhost:8000/professor', professor, {
+        const res = await axios.post('http://localhost:8000/professor/', professor, {
             headers: {
                 // Overwrite Axios's automatically set Content-Type
                 'Content-Type': 'application/json'

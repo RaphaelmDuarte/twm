@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from src.models.Form import AlunoForm
-from src.service.AlunoService import getAllAlunos, createAluno
+from src.models.Form import AlunoForm, VinculoForm
+from src.service.AlunoService import getAllAlunos, createAluno, vinculaMateria
 
 aluno = APIRouter(
     prefix='/aluno',
@@ -14,3 +14,7 @@ async def get_all_alunos():
 @aluno.post('/')
 async def create_aluno(aluno: AlunoForm):
     return await createAluno(aluno)
+
+@aluno.post('/vinculo')
+async def vincula_materia(vinculo: VinculoForm):
+    return await vinculaMateria(vinculo)

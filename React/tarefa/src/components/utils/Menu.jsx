@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.css';
 import Alunos from "../cadastros/Aluno.jsx";
 import Cursos from "../cadastros/Curso.jsx";
 import Professores from "../cadastros/Professor.jsx";
+import Vinculo from "../cadastros/Vincula.jsx";
 import "./style.css";
 
 function Menu() {
@@ -37,20 +38,8 @@ function Menu() {
             <NavItem eventKey="/professor">
               <NavText>Professor</NavText>
             </NavItem>
-          </NavItem>
-          <NavItem eventKey="charts">
-            <NavIcon>
-              <i
-                className="fa fa-fw fa-line-chart"
-                style={{ fontSize: "1.75em" }}
-              />
-            </NavIcon>
-            <NavText>Charts</NavText>
-            <NavItem eventKey="charts/linechart">
-              <NavText>Line Chart</NavText>
-            </NavItem>
-            <NavItem eventKey="charts/barchart">
-              <NavText>Bar Chart</NavText>
+            <NavItem eventKey="/vinculo">
+              <NavText>Vínculo</NavText>
             </NavItem>
           </NavItem>
         </SideNav.Nav>
@@ -59,6 +48,7 @@ function Menu() {
         <Route path="/aluno" element={<Alunos />} />
         <Route path="/curso" element={<Cursos />} />
         <Route path="/professor" element={<Professores />} />
+        <Route path="/vinculo" element={<Vinculo />} />
       </Routes>
     </>
   );

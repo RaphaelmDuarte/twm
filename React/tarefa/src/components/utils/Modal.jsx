@@ -17,7 +17,7 @@ const ModalAlert = (props) => {
         <Modal.Body>
           <h2>{props.texto}</h2>
         </Modal.Body>
-
+        
         <Modal.Footer>
           <Button variant="secondary" onClick={e => props.close(false)}>Ok</Button>
         </Modal.Footer>

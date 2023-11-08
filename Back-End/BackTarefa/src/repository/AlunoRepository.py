@@ -1,10 +1,10 @@
 from settings import CONECTION
-from src.models.Form import AlunoForm
-from src.models.View import AlunoView
+from src.models.Form import AlunoForm, VinculoForm
+from src.models.View import AlunoView, VinculoView
 
 connected = CONECTION
 
-async def get_all_Alunos():
+async def get_All_Alunos():
     Alunos = []
     query = "SELECT * FROM Aluno;"
     conn = connected
@@ -50,6 +50,21 @@ async def create_Aluno(aluno: AlunoForm):
             complemento=aluno.complemento,
             cidade=aluno.cidade,
             estado=aluno.estado
+        )
+    except Exception as e:
+        print(e)
+
+async def vincula_Materia(vinculo: VinculoForm):
+    query = "INSERT INTO CursoAluno(curso_id, aluno_id) VALUES({}, {});"
+    conn = connected
+    cur = conn.cursor()
+    try:
+        sql = query.format(vinculo.curso_id, vinculo.aluno_id)
+        cur.execute(sql)
+        conn.commit()
+        return VinculoView(
+            curso_id=vinculo.curso_id,
+            aluno_id=vinculo.aluno_id
         )
     except Exception as e:
         print(e)

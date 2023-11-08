@@ -11,6 +11,11 @@ class AlunoView(BaseModel):
     cidade: str
     estado: str
 
+class CursoView(BaseModel):
+    id: int
+    nome: str
+    professor_id: int
+
 class ProfessorView(BaseModel):
     id: int
     nome: str
@@ -21,3 +26,7 @@ class ProfessorView(BaseModel):
     complemento: str
     cidade: str
     estado: str
+
+class VinculoView(BaseModel):
+    curso_id: int
+    aluno_id: int
