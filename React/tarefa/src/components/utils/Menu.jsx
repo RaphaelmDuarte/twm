@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.css';
 import Alunos from "../cadastros/Aluno.jsx";
 import Cursos from "../cadastros/Curso.jsx";
 import Professores from "../cadastros/Professor.jsx";
+import Root from "../cadastros/Root.jsx";
 import Vinculo from "../cadastros/Vincula.jsx";
 import "./style.css";
 
@@ -45,6 +46,7 @@ function Menu() {
         </SideNav.Nav>
       </SideNav>
       <Routes>
+        <Route path="/" element={<Root />} />
         <Route path="/aluno" element={<Alunos />} />
         <Route path="/curso" element={<Cursos />} />
         <Route path="/professor" element={<Professores />} />

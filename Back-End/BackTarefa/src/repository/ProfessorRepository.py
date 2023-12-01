@@ -29,6 +29,28 @@ async def get_all_professores():
     except Exception as e:
         print(e)
 
+async def get_professor(id: int):
+    query = "SELECT * FROM Professor WHERE id = {}"
+    conn = connected
+    cur = conn.cursor()
+    try:
+        sql = query.format(id)
+        cur.execute(sql)
+        data = cur.fetchone()
+        return ProfessorView(
+            id=data[0],
+            nome=data[1],
+            email=data[2],
+            cpf=data[3],
+            endereco=data[4],
+            numero=data[5],
+            complemento=data[6],
+            cidade=data[7],
+            estado=data[8]
+        )
+    except Exception as e:
+        print(e)
+
 async def create_professor(professor: ProfessorForm):
     query = """INSERT INTO Professor(nome, email, cpf, endereco, numero, complemento, cidade, estado)
                 VALUES('{}', '{}' , '{}', '{}', {}, '{}', '{}', '{}') RETURNING id;"""

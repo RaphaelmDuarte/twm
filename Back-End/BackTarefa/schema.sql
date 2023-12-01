@@ -2,7 +2,7 @@ CREATE TABLE Aluno(
     id BigSerial PRIMARY KEY,
     nome varchar(45),
     email varchar(45),
-    cpf int,
+    cpf varchar(20),
     endereco varchar(45),
     numero int,
     complemento varchar(45),

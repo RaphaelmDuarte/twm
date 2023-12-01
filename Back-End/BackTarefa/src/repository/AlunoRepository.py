@@ -29,6 +29,60 @@ async def get_All_Alunos():
     except Exception as e:
         print(e)
 
+async def get_aluno_cpf(cpf: str):
+    query = "SELECT * FROM Aluno WHERE cpf = '{}'"
+    conn = connected
+    cur = conn.cursor()
+    try:
+        sql = query.format(cpf)
+        cur.execute(sql)
+        data = cur.fetchone()
+        return AlunoView(
+            id=data[0],
+            nome=data[1],
+            email=data[2],
+            cpf=data[3],
+            endereco=data[4],
+            numero=data[5],
+            complemento=data[6],
+            cidade=data[7],
+            estado=data[8]
+        )
+    except Exception as e:
+        print(e)
+
+async def get_materias_aluno(cpf: str):
+    query = """ select 
+                    aluno.id,
+                    aluno.nome,
+                    curso.nome,
+                    professor.nome
+                from
+                    aluno
+                    inner join cursoaluno ca on aluno.id = ca.aluno_id
+                    inner join curso on ca.curso_id = curso.id
+                    inner join professor on curso.professor_id = professor.id
+                where
+                    aluno.cpf = '{}'
+            """
+    conn = connected
+    cur = conn.cursor()
+    cursos = []
+    try:
+        sql = query.format(cpf)
+        cur.execute(sql)
+        row = cur.fetchall()
+        for data in row:
+            cursos.append({
+                "id": data[0],
+                "aluno": data[1],
+                "curso": data[2],
+                "professor": data[3]
+            })
+        return cursos
+    except Exception as e:
+        print(e)
+
 async def create_Aluno(aluno: AlunoForm):
     query = """INSERT INTO Aluno(nome, email, cpf, endereco, numero, complemento, cidade, estado)
                 VALUES('{}', '{}' , '{}', '{}', {}, '{}', '{}', '{}') RETURNING id;"""

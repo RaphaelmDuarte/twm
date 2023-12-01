@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.routes.AlunoRoute import aluno
 from src.routes.CursoRoute import curso
 from src.routes.ProfessorRoute import professor
+from src.routes.VinculoRoute import vinculo
 
 origins = ["*"]
 
@@ -18,6 +19,7 @@ app.add_middleware(
 app.include_router(aluno)
 app.include_router(curso)
 app.include_router(professor)
+app.include_router(vinculo)
 
 @app.get('/')
 def getAll():
